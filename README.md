@@ -42,6 +42,8 @@ Snippets
 | al      | alias pattern       | alias name = expression |
 | lo      | local pattern       | local name = expression |
 | gram    | grammar pattern     | grammar<br>&nbsp;&nbsp;grammar_name<br>end |
+| testa   | accept test         | -- test name accepts "string" |
+| testr   | reject test         | -- test name rejects "string" |
 
 Author
 ------

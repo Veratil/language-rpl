@@ -15,3 +15,9 @@
         ${1:grammar_name}
       end
       """
+  'accept test':
+    'prefix': 'testa'
+    'body': '-- test ${1:name} accepts "${2:string}"'
+  'reject test':
+    'prefix': 'testr'
+    'body': '-- test {$1:name} rejects "${2:string}"'
