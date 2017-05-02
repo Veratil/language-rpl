@@ -1,0 +1,17 @@
+'.source.rpl':
+  'local alias pattern':
+    'prefix': 'lal'
+    'body': 'local alias ${1:name} = ${2:expression}'
+  'alias pattern':
+    'prefix': 'al'
+    'body': 'alias ${1:name} = ${2:expression}'
+  'local pattern':
+    'prefix': 'lo'
+    'body': 'local ${1:name} = ${2:expression}'
+  'grammar pattern':
+    'prefix': 'gram'
+    'body': """
+      grammar
+        ${1:grammar_name}
+      end
+      """

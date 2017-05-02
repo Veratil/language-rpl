@@ -1,0 +1,239 @@
+'comment': 'RPL Syntax: version 1.1'
+'fileTypes': [
+    'rpl'
+]
+'name': 'Rosie Pattern Language (RPL)'
+'scopeName': 'source.rpl'
+'patterns': [
+    {
+        'match': '^(rpl) (\\d{1,2}\\.\\d{1,2})$'
+        'name': 'spec.version.rpl'
+        'captures':
+            '1':
+                'name': 'keyword.control.rpl'
+            '2':
+                'name': 'constant.numeric.version.major.rpl'
+            '3':
+                'name': 'constant.numeric.version.minor.rpl'
+    }
+    {
+        'match': '^(grammar|end)$'
+        'name': 'storage.function.rpl'
+    }
+    {
+        'match': '\\blocal\\b'
+        'name': 'storage.modifier.rpl'
+    }
+    {
+        'match': '\\balias\\b'
+        'name': 'storage.type.rpl'
+    }
+    {
+        'include': '#identifier'
+    }
+    {
+        'match': '='
+        'name': 'keyword.operator.assignment.rpl'
+    }
+    {
+        'match': '!'
+        'name': 'keyword.operator.negation.rpl'
+    }
+    {
+        'match': '(\\?)'
+        'name': 'keyword.operator.repetition.optional.rpl'
+    }
+    {
+        'match': '(\\+)'
+        'name': 'keyword.operator.repetition.plus.rpl'
+    }
+    {
+        'match': '(\\*)'
+        'name': 'keyword.operator.repetition.star.rpl'
+    }
+    {
+        'match': '/'
+        'name': 'keyword.operator.choice.rpl'
+    }
+    {
+        'match': '{(\\d+),(\\d+)}'
+        'name': 'keyword.operator.repetition.range.rpl'
+        'captures':
+            '1':
+                'name': 'keyword.operator.repetition.range.from.rpl'
+            '2':
+                'name': 'keyword.operator.repetition.range.to.rpl'
+    }
+    {
+        'match': '{|}'
+        'name': 'keyword.operator.group.raw.rpl'
+    }
+    {
+        'match': '\\(|\\)'
+        'name': 'keyword.operator.group.cooked.rpl'
+    }
+    {
+        'include': '#union-class'
+    }
+    {
+        'include': '#named-class'
+    }
+    {
+        'include': '#range-class'
+    }
+    {
+        'include': '#list-class'
+    }
+    {
+        'include': '#string_dq'
+    }
+#    {
+#        'include': '#string_sq'
+#    }
+    {
+        'include': '#test-command'
+    }
+    {
+        'include': '#line-comment'
+    }
+]
+'repository':
+    'union-class':
+        'match': '(\\[\\^(\\[.+?])])|(\\[(\\[.+?])])'
+#        'name': 'constant.class.union.rpl'
+        'captures':
+            '1':
+                'name': 'constant.class.union.negated.rpl'
+            '2':
+                'patterns': [
+                    {
+                        'include': '#named-class'
+                    }
+                    {
+                        'include': '#range-class'
+                    }
+                    {
+                        'include': '#list-class'
+                    }
+                ]
+            '3':
+                'name': 'constant.class.union.rpl'
+            '4':
+                'patterns': [
+                    {
+                        'include': '#named-class'
+                    }
+                    {
+                        'include': '#range-class'
+                    }
+                    {
+                        'include': '#list-class'
+                    }
+                ]
+    'named-class':
+        'match': '(\\[\\^:[A-Za-z]+:])|(\\[:[A-Za-z]+:])'
+        'captures':
+            '1':
+                'name': 'constant.class.named.negated.rpl'
+            '2':
+                'name': 'constant.class.named.rpl'
+#        'name': 'constant.class.named.rpl'
+    'range-class':
+        'match': '(\\[\\^(?:[^\\[^\\]]|\\.)-(?:[^\\[^\\]]|\\.)])|(\\[(?:[^\\[^\\]]|\\.)-(?:[^\\[^\\]]|\\.)])'
+        'captures':
+            '1':
+                'name': 'constant.class.range.negated.rpl'
+            '2':
+                'name': 'constant.class.range.rpl'
+#        'name': 'constant.class.range.rpl'
+    'list-class':
+        'match': '(\\[\\^[^\\]]+?])|(\\[[^\\]]+?])'
+        'captures':
+            '1':
+                'name': 'constant.class.list.negated.rpl'
+            '2':
+                'name': 'constant.class.list.rpl'
+#        'name': 'constant.class.list.rpl'
+    'string_dq':
+        'begin': '(")'
+        'beginCaptures':
+            '1':
+                'name': 'punctuation.definition.string.begin.rpl'
+        'end': '((?<=")(")|")|(\\n)'
+        'endCaptures':
+            '1':
+                'name': 'punctuation.definition.string.end.rpl'
+            '2':
+                'name': 'meta.empty-string.rpl'
+            '3':
+                'name': 'invalid.illegal.rpl'
+        'name': 'string.rpl'
+        'patterns': [
+            {
+                'include': '#escaped_char'
+            }
+        ]
+#    'string_sq':
+#        'begin': '(\')'
+#        'beginCaptures':
+#            '1':
+#                'name': 'punctuation.definition.string.begin.rpl'
+#        'end': '((?<=\')(\')|\')|(\\n)'
+#        'endCaptures':
+#            '1':
+#                'name': 'punctuation.definition.string.end.rpl'
+#            '2':
+#                'name': 'meta.empty-string.rpl'
+#            '3':
+#                'name': 'invalid.illegal.rpl'
+#        'name': 'string.rpl'
+#        'patterns': [
+#            {
+#                'include': '#escaped_char'
+#            }
+#        ]
+    'escaped_char':
+        'match': '\\\\.'
+        'name': 'constant.character.escape.rpl'
+    'identifier':
+        'match': '\\b(?:([A-Za-z][A-Za-z0-9_]*)(\\.)([A-Za-z][A-Za-z0-9_]*))|([A-Za-z][A-Za-z0-9_]*)\\b'
+        'name': 'identifier.rpl'
+        'captures':
+            '1':
+                'name': 'entity.name.namespace.rpl'
+            '2':
+                'name': 'keyword.operator.rpl'
+            '3':
+                'name': 'entity.name.pattern.rpl'
+            '4':
+                'name': 'entity.name.pattern.rpl'
+    'line-comment':
+        # Use lookbehind and lookahead to make sure it's not within a construct
+        # Currently ensure not within a string
+        'match': '((?<![\'"])--(?![\'"]).*)'
+        'captures':
+            '1':
+                'name': 'comment.rpl'
+    'test-command':
+        'match': '^(--\\s+test\\s+)\\b(.+)\\b (accepts|rejects) (?:(.+))'
+        'captures':
+            '1':
+                'name': 'keyword.test.rpl'
+            '2':
+                'patterns': [
+                    {
+                        'include': '#identifier'
+                    }
+                ]
+            '3':
+                'name': 'keyword.test.command.rpl'
+            '4':
+                'patterns': [
+                    {
+                        'include': '#string_dq'
+                    }
+#                    {
+#                        'include': '#string_sq'
+#                    }
+                ]
+'scopeName': 'source.rpl'

@@ -1,0 +1,24 @@
+{
+  "name": "language-rpl",
+  "version": "0.0.1",
+  "private": false,
+  "author": {
+    "name": "Veratil",
+    "email": "veratil@gmail.com"
+  },
+  "description": "Add syntax highlighting and snippets for Rosie Pattern Language files in Atom",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Veratil/language-rpl"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.50.0"
+  },
+  "dependencies": {},
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/Veratil/language-rpl/issues"
+  },
+  "homepage": "https://github.com/Veratil/language-rpl"
+}
