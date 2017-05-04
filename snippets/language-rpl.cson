@@ -20,4 +20,4 @@
     'body': '-- test ${1:name} accepts "${2:string}"'
   'reject test':
     'prefix': 'testr'
-    'body': '-- test {$1:name} rejects "${2:string}"'
+    'body': '-- test ${1:name} rejects "${2:string}"'
