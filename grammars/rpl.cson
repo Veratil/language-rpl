@@ -40,6 +40,10 @@
         'name': 'keyword.operator.negation.rpl'
     }
     {
+        'match': '@'
+        'name': 'keyword.operator.peek.rpl'
+    }
+    {
         'match': '(\\?)'
         'name': 'keyword.operator.repetition.optional.rpl'
     }
@@ -210,7 +214,7 @@
     'line-comment':
         # Use lookbehind and lookahead to make sure it's not within a construct
         # Currently ensure not within a string
-        'match': '((?<![\'"])--(?![\'"]).*)'
+        'match': '((?<!["])--(?!["]).*)'
         'captures':
             '1':
                 'name': 'comment.rpl'
